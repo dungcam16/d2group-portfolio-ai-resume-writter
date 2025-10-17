@@ -59,7 +59,8 @@ const Check = () => {
       const resumeBase64 = await fileToBase64(file);
       await checkResume({
         resume: resumeBase64,
-        flow: "download",
+        flow: "download_result",
+        result_html: result,
       });
 
       toast.success("Download initiated!");

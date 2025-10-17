@@ -15,13 +15,14 @@ export interface ResumeFormData {
   skills: string[];
   education: string;
   professionalSummary: string;
-  flow: "create" | "download";
+  flow: "create" | "download_resume";
   resume_html?: string;
 }
 
 export interface ResumeCheckData {
   resume: string; // base64
-  flow: "check" | "download";
+  flow: "check" | "download_result";
+  result_html?: string;
 }
 
 export const fileToBase64 = (file: File): Promise<string> => {
