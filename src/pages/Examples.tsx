@@ -2,30 +2,52 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, Download } from "lucide-react";
+import { Download } from "lucide-react";
+
+// Import all template images
+import imgClassic from "@/assets/templates/classic-professional.jpg";
+import imgModern from "@/assets/templates/modern-tech.jpg";
+import imgCreative from "@/assets/templates/creative-designer.jpg";
+import imgExecutive from "@/assets/templates/executive-leader.jpg";
+import imgMarketing from "@/assets/templates/marketing-specialist.jpg";
+import imgSales from "@/assets/templates/sales-professional.jpg";
+import imgHealthcare from "@/assets/templates/healthcare-expert.jpg";
+import imgFinance from "@/assets/templates/finance-analyst.jpg";
+import imgSoftware from "@/assets/templates/software-engineer.jpg";
+import imgProject from "@/assets/templates/project-manager.jpg";
+import imgData from "@/assets/templates/data-scientist.jpg";
+import imgUX from "@/assets/templates/ux-designer.jpg";
+import imgContent from "@/assets/templates/content-writer.jpg";
+import imgHR from "@/assets/templates/hr-manager.jpg";
+import imgLegal from "@/assets/templates/legal-advisor.jpg";
+import imgTeacher from "@/assets/templates/teacher.jpg";
+import imgCustomer from "@/assets/templates/customer-success.jpg";
+import imgBusiness from "@/assets/templates/business-analyst.jpg";
+import imgOperations from "@/assets/templates/operations-manager.jpg";
+import imgStartup from "@/assets/templates/startup-founder.jpg";
 
 const Examples = () => {
   const templates = [
-    { id: 1, name: "Classic Professional", category: "Professional" },
-    { id: 2, name: "Modern Tech", category: "Technology" },
-    { id: 3, name: "Creative Designer", category: "Creative" },
-    { id: 4, name: "Executive Leader", category: "Professional" },
-    { id: 5, name: "Marketing Specialist", category: "Marketing" },
-    { id: 6, name: "Sales Professional", category: "Sales" },
-    { id: 7, name: "Healthcare Expert", category: "Healthcare" },
-    { id: 8, name: "Finance Analyst", category: "Finance" },
-    { id: 9, name: "Software Engineer", category: "Technology" },
-    { id: 10, name: "Project Manager", category: "Management" },
-    { id: 11, name: "Data Scientist", category: "Technology" },
-    { id: 12, name: "UX Designer", category: "Creative" },
-    { id: 13, name: "Content Writer", category: "Creative" },
-    { id: 14, name: "HR Manager", category: "Professional" },
-    { id: 15, name: "Legal Advisor", category: "Professional" },
-    { id: 16, name: "Teacher", category: "Education" },
-    { id: 17, name: "Customer Success", category: "Sales" },
-    { id: 18, name: "Business Analyst", category: "Business" },
-    { id: 19, name: "Operations Manager", category: "Management" },
-    { id: 20, name: "Startup Founder", category: "Business" },
+    { id: 1, name: "Classic Professional", category: "Professional", image: imgClassic },
+    { id: 2, name: "Modern Tech", category: "Technology", image: imgModern },
+    { id: 3, name: "Creative Designer", category: "Creative", image: imgCreative },
+    { id: 4, name: "Executive Leader", category: "Professional", image: imgExecutive },
+    { id: 5, name: "Marketing Specialist", category: "Marketing", image: imgMarketing },
+    { id: 6, name: "Sales Professional", category: "Sales", image: imgSales },
+    { id: 7, name: "Healthcare Expert", category: "Healthcare", image: imgHealthcare },
+    { id: 8, name: "Finance Analyst", category: "Finance", image: imgFinance },
+    { id: 9, name: "Software Engineer", category: "Technology", image: imgSoftware },
+    { id: 10, name: "Project Manager", category: "Management", image: imgProject },
+    { id: 11, name: "Data Scientist", category: "Technology", image: imgData },
+    { id: 12, name: "UX Designer", category: "Creative", image: imgUX },
+    { id: 13, name: "Content Writer", category: "Creative", image: imgContent },
+    { id: 14, name: "HR Manager", category: "Professional", image: imgHR },
+    { id: 15, name: "Legal Advisor", category: "Professional", image: imgLegal },
+    { id: 16, name: "Teacher", category: "Education", image: imgTeacher },
+    { id: 17, name: "Customer Success", category: "Sales", image: imgCustomer },
+    { id: 18, name: "Business Analyst", category: "Business", image: imgBusiness },
+    { id: 19, name: "Operations Manager", category: "Management", image: imgOperations },
+    { id: 20, name: "Startup Founder", category: "Business", image: imgStartup },
   ];
 
   return (
@@ -45,8 +67,13 @@ const Examples = () => {
             {templates.map((template) => (
               <Card key={template.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                 <CardContent className="p-6">
-                  <div className="aspect-[8.5/11] bg-muted rounded-lg mb-4 flex items-center justify-center group-hover:bg-muted/80 transition-colors">
-                    <FileText className="h-16 w-16 text-muted-foreground/30" />
+                  <div className="aspect-[8.5/11] bg-muted rounded-lg mb-4 overflow-hidden">
+                    <img
+                      src={template.image}
+                      alt={`${template.name} resume template`}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
                   </div>
                   <div className="space-y-2">
                     <h3 className="font-semibold">{template.name}</h3>
