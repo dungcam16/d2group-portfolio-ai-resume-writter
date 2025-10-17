@@ -7,12 +7,13 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 import { checkResume, fileToBase64 } from "@/utils/api";
-import { Upload, Loader2, CheckCircle } from "lucide-react";
+import { Upload, Loader2, CheckCircle, Download } from "lucide-react";
 
 const Check = () => {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
+  const [downloadLoading, setDownloadLoading] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -47,6 +48,26 @@ const Check = () => {
       toast.error("Failed to analyze resume. Please try again.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDownload = async () => {
+    if (!result || !file) return;
+    
+    setDownloadLoading(true);
+    try {
+      const resumeBase64 = await fileToBase64(file);
+      await checkResume({
+        resume: resumeBase64,
+        flow: "download",
+      });
+
+      toast.success("Download initiated!");
+    } catch (error) {
+      console.error("Error downloading results:", error);
+      toast.error("Failed to download results. Please try again.");
+    } finally {
+      setDownloadLoading(false);
     }
   };
 
@@ -113,15 +134,35 @@ const Check = () => {
                     dangerouslySetInnerHTML={{ __html: result }}
                   />
 
-                  <Button 
-                    onClick={() => {
-                      setFile(null);
-                      setResult(null);
-                    }}
-                    variant="outline"
-                  >
-                    Check Another Resume
-                  </Button>
+                  <div className="flex gap-4 justify-center">
+                    <Button 
+                      onClick={handleDownload}
+                      className="bg-gradient-primary hover:opacity-90"
+                      disabled={downloadLoading}
+                    >
+                      {downloadLoading ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Downloading...
+                        </>
+                      ) : (
+                        <>
+                          <Download className="mr-2 h-4 w-4" />
+                          Download Results
+                        </>
+                      )}
+                    </Button>
+                    
+                    <Button 
+                      onClick={() => {
+                        setFile(null);
+                        setResult(null);
+                      }}
+                      variant="outline"
+                    >
+                      Check Another Resume
+                    </Button>
+                  </div>
                 </div>
               )}
             </CardContent>

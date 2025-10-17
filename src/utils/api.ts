@@ -21,7 +21,7 @@ export interface ResumeFormData {
 
 export interface ResumeCheckData {
   resume: string; // base64
-  flow: "check";
+  flow: "check" | "download";
 }
 
 export const fileToBase64 = (file: File): Promise<string> => {
