@@ -94,7 +94,7 @@ const ReviewStep = ({ data, onBack }: Props) => {
         skills: skillsArray,
         education: data.education,
         professionalSummary: data.professionalSummary,
-        flow: "download_resume",
+        flow: "download",
         resume_html: resumeHtml,
       });
 
