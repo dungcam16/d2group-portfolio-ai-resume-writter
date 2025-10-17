@@ -46,12 +46,18 @@ export const submitResume = async (data: ResumeFormData) => {
     submitted_at: new Date().toISOString(),
   };
 
+  // No timeout - AI processing can take a long time
+  const controller = new AbortController();
+  
   const response = await fetch(API_ENDPOINT, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
+    signal: controller.signal,
+    // Remove default timeout by not setting it
+    keepalive: true,
   });
 
   if (!response.ok) {
@@ -69,12 +75,17 @@ export const checkResume = async (data: ResumeCheckData) => {
     submitted_at: new Date().toISOString(),
   };
 
+  // No timeout - AI processing can take a long time
+  const controller = new AbortController();
+
   const response = await fetch(API_ENDPOINT, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
+    signal: controller.signal,
+    keepalive: true,
   });
 
   if (!response.ok) {
