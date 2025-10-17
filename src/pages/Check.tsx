@@ -108,10 +108,10 @@ const Check = () => {
                   </div>
                   <h2 className="text-2xl font-semibold">Analysis Complete!</h2>
                   
-                  <div className="text-left space-y-4 bg-muted/50 p-6 rounded-lg">
-                    <h3 className="font-semibold text-lg">Results:</h3>
-                    <pre className="text-sm whitespace-pre-wrap">{JSON.stringify(result, null, 2)}</pre>
-                  </div>
+                  <div 
+                    className="text-left bg-white p-8 rounded-lg shadow-inner max-h-[600px] overflow-auto"
+                    dangerouslySetInnerHTML={{ __html: result }}
+                  />
 
                   <Button 
                     onClick={() => {
