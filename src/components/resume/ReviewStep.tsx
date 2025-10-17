@@ -41,11 +41,26 @@ const ReviewStep = ({ data, onBack }: Props) => {
         flow: "create",
       });
 
-      if (response.resume_html) {
-        setResumeHtml(response.resume_html);
+      console.log("API Response:", response);
+      
+      // Handle different response formats
+      let htmlContent = "";
+      if (typeof response === "string") {
+        htmlContent = response;
+      } else if (response.resume_html) {
+        htmlContent = response.resume_html;
+      } else if (response.output) {
+        htmlContent = response.output;
+      } else if (response.html) {
+        htmlContent = response.html;
+      }
+
+      if (htmlContent && htmlContent.trim()) {
+        setResumeHtml(htmlContent);
         setSuccess(true);
         toast.success("Resume generated successfully!");
       } else {
+        console.error("No HTML content found in response:", response);
         toast.error("Resume generated but no preview available");
       }
     } catch (error) {
