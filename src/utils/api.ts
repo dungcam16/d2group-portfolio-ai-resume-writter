@@ -58,7 +58,16 @@ export const submitResume = async (data: ResumeFormData) => {
     throw new Error(`API request failed: ${response.statusText}`);
   }
 
-  return response.json();
+  const contentType = response.headers.get("content-type") || "";
+  if (contentType.includes("application/json")) {
+    const resClone = response.clone();
+    try {
+      return await response.json();
+    } catch {
+      return await resClone.text();
+    }
+  }
+  return await response.text();
 };
 
 export const checkResume = async (data: ResumeCheckData) => {
@@ -81,5 +90,14 @@ export const checkResume = async (data: ResumeCheckData) => {
     throw new Error(`API request failed: ${response.statusText}`);
   }
 
-  return response.json();
+  const contentType = response.headers.get("content-type") || "";
+  if (contentType.includes("application/json")) {
+    const resClone = response.clone();
+    try {
+      return await response.json();
+    } catch {
+      return await resClone.text();
+    }
+  }
+  return await response.text();
 };
