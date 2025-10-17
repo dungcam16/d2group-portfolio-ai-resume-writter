@@ -1,7 +1,14 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
-import { FileText, CheckCircle, Layout, BookOpen, Sparkles, Zap, Shield, Globe } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { CheckCircle } from "lucide-react";
+import { Link } from "react-router-dom";
+
+import imgResumeBuilder from "@/assets/ai-resume-builder.jpg";
+import imgResumeChecker from "@/assets/resume-checker.jpg";
+import imgTemplates from "@/assets/resume-templates.jpg";
+import imgSkills from "@/assets/resume-skills.jpg";
 
 const Features = () => {
   const mainFeatures = [

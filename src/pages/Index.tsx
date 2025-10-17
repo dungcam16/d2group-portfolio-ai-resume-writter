@@ -3,33 +3,44 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { FileText, CheckCircle, Layout, BookOpen, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+
+// Feature illustrations
+import heroBg from "@/assets/hero-background.jpg";
+import imgResumeBuilder from "@/assets/ai-resume-builder.jpg";
+import imgResumeChecker from "@/assets/resume-checker.jpg";
+import imgTemplates from "@/assets/resume-templates.jpg";
+import imgSkills from "@/assets/resume-skills.jpg";
 
 const Index = () => {
   const features = [
     {
-      icon: FileText,
       title: "AI Resume Builder",
       description: "Create professional resumes with AI-powered suggestions and templates",
       link: "/resume",
+      image: imgResumeBuilder,
+      alt: "AI Resume Builder illustration",
     },
     {
-      icon: CheckCircle,
       title: "Resume Checker",
       description: "Get instant feedback and analysis on your existing resume",
       link: "/check",
+      image: imgResumeChecker,
+      alt: "Resume Checker illustration",
     },
     {
-      icon: Layout,
       title: "Resume Templates",
       description: "Browse 20+ professionally designed resume templates",
       link: "/examples",
+      image: imgTemplates,
+      alt: "Resume Templates gallery",
     },
     {
-      icon: BookOpen,
       title: "Resume Skills",
       description: "Discover industry-specific skills to boost your resume",
       link: "/skills",
+      image: imgSkills,
+      alt: "Resume Skills library",
     },
   ];
 
@@ -38,8 +49,13 @@ const Index = () => {
       <Header />
       
       <main className="flex-1">
-        {/* Hero Section */}
         <section className="relative bg-gradient-hero py-20 md:py-32 overflow-hidden">
+          <img
+            src={heroBg}
+            alt="Professional hero background"
+            className="absolute inset-0 h-full w-full object-cover opacity-20"
+            loading="eager"
+          />
           <div className="container relative z-10">
             <div className="max-w-3xl mx-auto text-center animate-fade-in">
               <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
@@ -67,17 +83,21 @@ const Index = () => {
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {features.map((feature, index) => (
-                <Link key={index} to={feature.link}>
-                  <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer border-2 hover:border-primary/50">
-                    <CardContent className="p-6">
-                      <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4">
-                        <feature.icon className="h-6 w-6 text-primary-foreground" />
-                      </div>
-                      <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
-                      <p className="text-muted-foreground text-sm">{feature.description}</p>
-                    </CardContent>
-                  </Card>
-                </Link>
+                <Card key={index} className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer border-2 hover:border-primary/50">
+                  <CardContent className="p-6">
+                    <img
+                      src={feature.image}
+                      alt={feature.alt}
+                      className="w-full h-36 object-cover rounded-md mb-4"
+                      loading="lazy"
+                    />
+                    <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
+                    <p className="text-muted-foreground text-sm mb-4">{feature.description}</p>
+                    <Link to={feature.link} className="inline-block">
+                      <Button size="sm" className="bg-gradient-primary hover:opacity-90">TRY IT</Button>
+                    </Link>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>
